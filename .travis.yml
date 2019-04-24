@@ -1,0 +1,29 @@
+language: node_js
+node_js: stable
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - master
+
+before_install:
+  - yarn
+  
+
+# before_script:
+ # - npm install -g gulp
+    
+script:
+  - npm run build
+
+after_script:
+  - cd ./dist
+  - git init
+  - git config user.name "hehui-Js"
+  - git config user.email "hehui_js@163.com"
+  - git add .
+  - git commit -m "Travis build success"
+  - git push --force --quiet "https://${travis}@github.com/hehui-Js/ci-demo.git" master:gh-pages
