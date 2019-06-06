@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <v-header></v-header>
     <h1>This is an about page</h1>
     <div class="m-list-wrap">
       <p v-for="(item,index) in list" :key="index">{{item.num | formatNum}}</p>
@@ -13,7 +14,11 @@
   </div>
 </template>
 <script>
+import Header from '@/components/header'
 export default {
+  components: {
+    vHeader: Header
+  },
   data () {
     return {
       list: [],
@@ -40,3 +45,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.about {
+  background-color: bisque;
+}
+</style>
