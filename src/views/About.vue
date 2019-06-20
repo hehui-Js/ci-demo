@@ -42,6 +42,7 @@ export default {
       })
     }
     this.list = Object.freeze(temList)
+    console.log(this.list)
   }
 }
 </script>
