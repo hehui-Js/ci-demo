@@ -1,7 +1,7 @@
 language: node_js
 node_js: 10
 
-install: npm install
+install: yarn
 
 cache:
   directories:
@@ -10,9 +10,6 @@ cache:
 branches:
   only:
     - master
-
-# before_script:
- # - npm install -g gulp
     
 script:
   - npm run build
