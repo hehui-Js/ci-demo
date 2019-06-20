@@ -18,8 +18,6 @@ export default {
   },
   watch: {
     $route (to, from) {
-      console.log('to=%O', to)
-      console.log('from=%O', from)
       // 如果to索引大于from索引,判断为前进状态,反之则为后退状态
       if (to.meta.index > from.meta.index) {
         // 设置动画名称
