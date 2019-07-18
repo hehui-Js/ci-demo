@@ -8,7 +8,7 @@
     <div>
       <div v-for="(item,index) in modeList" :key="index">
         <p>{{item}}</p>
-        <input type="text" :inputmode="item" :placeholder="item">
+        <input type="text" :inputmode="item" :placeholder="item" />
       </div>
     </div>
   </div>
