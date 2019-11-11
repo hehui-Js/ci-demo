@@ -24,7 +24,6 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      console.log(this.$route)
       this.activeName = this.$route.path
       this.openNames = [this.$route.path]
     })
