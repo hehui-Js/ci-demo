@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <transition :name="transitionName">
-      <router-view/>
-    </transition>
+    <base-layout>
+      <transition :name="transitionName">
+        <router-view />
+      </transition>
+    </base-layout>
   </div>
 </template>
 <script>
+import BaseLayout from '@/components/layout/index'
+
 export default {
+  components: {
+    BaseLayout
+  },
   data () {
     return {
       transitionName: ''
@@ -34,7 +37,6 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 #nav {

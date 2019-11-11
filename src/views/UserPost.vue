@@ -1,52 +1,13 @@
 <template>
   <div class="home">
-    <v-header></v-header>
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <a href="weixin://" style="background: #01d00e">打开微信</a>
-    <div>
-      <h2>Vuex:</h2>
-      <p>count:{{$store.getters.getCount}}</p>
-    </div>
-    <div>
-      <p>canvas：</p>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-    </div>
-    <div class="waterfall-hegiht-css">
-      <div class="image-box" v-for="item in imgList" :key="item.url">
-        <img class="img" :src="item.url" alt />
-      </div>
-    </div>
-    <div>
-      <div class="message-list">
-        <p v-for="(item,index) in messageList" :key="index">{{item}}</p>
-      </div>
-      <div ref="formControl">
-        <input type="text" id="message" v-model="message" />
-        <label for="message" @click="handleSend">发送</label>
-      </div>
-    </div>
+    <h3>user-post</h3>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import CircleCanvas from '@/components/circle-canvas.vue'
-import Header from '@/components/header'
-import { setInterval } from 'timers'
 export default {
   name: 'home',
-  components: {
-    HelloWorld,
-    vHeader: Header,
-    CircleCanvas
-  },
   data () {
     return {
       imgList: [
