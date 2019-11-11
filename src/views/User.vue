@@ -8,15 +8,6 @@
       <h2>Vuex:</h2>
       <p>count:{{$store.getters.getCount}}</p>
     </div>
-    <div>
-      <p>canvas：</p>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-      <circle-canvas label="40%"></circle-canvas>
-    </div>
     <div class="waterfall-hegiht-css">
       <div class="image-box" v-for="item in imgList" :key="item.url">
         <img class="img" :src="item.url" alt />
@@ -37,15 +28,13 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import CircleCanvas from '@/components/circle-canvas.vue'
 import Header from '@/components/header'
 import { setInterval } from 'timers'
 export default {
   name: 'home',
   components: {
     HelloWorld,
-    vHeader: Header,
-    CircleCanvas
+    vHeader: Header
   },
   data () {
     return {

@@ -2,6 +2,6 @@ module.exports = {
   productionSourceMap: false,
   publicPath: './',
   devServer: {
-    port: 9527
+    port: 9850
   }
 }
