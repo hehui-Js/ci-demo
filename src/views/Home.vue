@@ -17,11 +17,6 @@
       <circle-canvas label="40%"></circle-canvas>
       <circle-canvas label="40%"></circle-canvas>
     </div>
-    <div class="waterfall-hegiht-css">
-      <div class="image-box" v-for="item in imgList" :key="item.url">
-        <img class="img" :src="item.url" alt />
-      </div>
-    </div>
     <div>
       <div class="message-list">
         <p v-for="(item,index) in messageList" :key="index">{{item}}</p>
@@ -31,15 +26,36 @@
         <label for="message" @click="handleSend">发送</label>
       </div>
     </div>
+    <div></div>
+
+    <div class="m-kute-wrap">
+      <div ref="kuteDoms" v-for="(item,index) in 10" :key="index" class="kute-item">{{index+1}}</div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Kute from 'kute.js'
 import HelloWorld from '@/components/HelloWorld.vue'
 import CircleCanvas from '@/components/circle-canvas.vue'
 import Header from '@/components/header'
-import { setInterval } from 'timers'
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
+  ['blockquote', 'code-block'],
+  [{ 'header': 1 }, { 'header': 2 }],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+  [{ 'script': 'sub' }, { 'script': 'super' }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }],
+  [{ 'direction': 'rtl' }],
+  [{ 'size': ['small', false, 'large', 'huge'] }],
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'color': [] }, { 'background': [] }],
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+  ['clean'],
+  ['link', 'image']
+]
 export default {
   name: 'home',
   components: {
@@ -82,11 +98,38 @@ export default {
         }
       ],
       messageList: [],
-      message: ''
+      message: '',
+      content: `<p class="rich_media_content " id="js_content"> 
+       <p style="margin: 5px 8px;max-width: 100%;font-family: -apple-system-font, system-ui,Helvetica Neue PingFang SC Hiragino Sans GB Microsoft YaHei UI Microsoft YaHei Arial, sans-serif;white-space: normal;font-size: 14px;letter-spacing: 1px;line-height: 1.75em;box-sizing: border-box !important;overflow-wrap: break-word !important;">
+        估计大部分人都做不到完全掌握。因此再次提个醒，
+        <strong>千万别以入行为终点。</strong>大家要清楚目前市场对前端岗的需求：初级前端供过于求，高级前端供小于求
+        <strong>。</strong>想更上一层楼，要学的东西还多着呢。
+       </p>
+       <p style="color:red;margin: 5px 8px;max-width: 100%;font-family: -apple-system-font, system-ui,Helvetica Neue PingFang SC Hiragino Sans GB Microsoft YaHei UI Microsoft YaHei Arial, sans-serif;white-space: normal;font-size: 14px;letter-spacing: 1px;line-height: 1.75em;box-sizing: border-box !important;overflow-wrap: break-word !important;">
+        估计大部分人都做不到完全掌握。因此再次提个醒，
+        <strong>千万别以入行为终点。</strong>大家要清楚目前市场对前端岗的需求：初级前端供过于求，高级前端供小于求
+        <strong>。</strong>想更上一层楼，要学的东西还多着呢。
+       </p>
+      </p>`,
+      editorSettings: {
+        modules: {
+          toolbar: {
+            container: toolbarOptions,
+            handlers: {
+              'image': function (value) {
+                console.log('image')
+              },
+              'clean': function (value) {
+              }
+            }
+          }
+        }
+      }
     }
   },
   mounted () {
     this.setCountLoop()
+    this.initAnimate()
   },
   methods: {
     setCountLoop () {
@@ -104,6 +147,21 @@ export default {
       this.$nextTick(() => {
         this.$refs.formControl.scrollIntoView({ block: 'start', behavior: 'smooth' })
       })
+    },
+    handleImageAdded (file, Editor, cursorLocation) {
+
+    },
+    initAnimate () {
+      const { kuteDoms } = this.$refs
+      kuteDoms.forEach((item, index) => {
+        const kute1 = Kute.fromTo(item, { translateX: 0 }, { translateX: 400 }, { duration: 1000, repeat: 1, yoyo: true, delay: index * 100, complete: () => { console.log(`${index}--complete`) } })
+        const kute2 = Kute.to(item, { backgroundColor: `#06${index}` }, { duration: 800, delay: index * 100, complete: () => { console.log(`${index}--complete`) } })
+        kute1.chain(kute2)
+        kute1.start()
+      })
+      // setTimeout(() => {
+      //   Kute.to('window', { scroll: 0, duration: 100 }).start()
+      // }, 2000)
     }
   }
 }
@@ -111,25 +169,39 @@ export default {
 <style lang="scss">
 .home {
   background-color: #fff;
-}
-.waterfall-hegiht-css {
-  display: flex;
-  flex-wrap: wrap;
-  .image-box {
-    flex-grow: 1;
-    width: 50%;
+
+  .waterfall-hegiht-css {
+    display: flex;
+    flex-wrap: wrap;
+    .image-box {
+      flex-grow: 1;
+      width: 50%;
+    }
+    .img {
+      display: block;
+      // width: 100%;
+      min-width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    &:after {
+      content: "";
+      display: block;
+      flex-grow: 99999;
+    }
   }
-  .img {
-    display: block;
-    // width: 100%;
-    min-width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  &:after {
-    content: "";
-    display: block;
-    flex-grow: 99999;
+  .m-kute-wrap {
+    .kute-item {
+      width: 100px;
+      height: 70px;
+      line-height: 70px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      color: #876;
+      margin-top: 5px;
+    }
   }
 }
 </style>

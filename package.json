@@ -13,6 +13,7 @@
   "dependencies": {
     "bezier-easing": "^2.1.0",
     "core-js": "^3.3.3",
+    "kute.js": "^1.6.6",
     "view-design": "^4.0.2",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
